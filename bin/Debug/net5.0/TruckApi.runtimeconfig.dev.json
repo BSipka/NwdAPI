@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Sile\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Sile\\.nuget\\packages"
+    ]
+  }
+}

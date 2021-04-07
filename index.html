@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <table id="Table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </table>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(
+                function(){
+                     manager.getAllProducts();
+                }
+            );
+
+            var manager = {
+                getAllProducts :function(){
+                    var obj = "";
+                    var service = "https://localhost:5001/api/Products";
+                    window.manager.getApi(service,onSuccess,onFailed);
+                function onSuccess(jsonData){
+                        debugger;
+                        obj = jsonData;
+                        $.each(jsonData, function(i,item){
+                            var rows = "<tr>"+
+                            "<td id='Id'>"+ item.productId + "</td>"+
+                            "<td id='Name'>"+ item.productName + "</td>"+
+                            "<td id='Price'>"+ item.unitPrice + "</td>"+
+                            "</tr>"
+                            $("#Table").append(rows);
+                        })
+                    }
+                function onFailed(){window.alert(error.statusText)};
+                return obj;
+                },
+               
+                getApi : function(service,successCallBack, errorCallBack){
+                    $.ajax({
+                        type:"GET",
+                        url : service,
+                        dataType :"json",
+                        success : successCallBack,
+                        error : errorCallBack
+
+                    });       
+                }
+            }
+        </script>
+    </body>
+</html>
